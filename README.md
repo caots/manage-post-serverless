@@ -87,17 +87,17 @@ resources: 32
 api keys:
   None
 endpoints:
-  POST - https://xxxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/create-post
-  PUT - https://xxxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/update-post/{id}
-  GET - https://xxxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post
-  GET - https://xxxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post/{id}
-  DELETE - https://xxxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/delete-post/{id}
+  POST - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/create-post
+  GET - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post
+  GET - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post/{postId}
+  PUT - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/update-post/{postId}
+  DELETE - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/delete-post/{postId}
 functions:
-  create: aws-node-rest-api-typescript-dev-create
-  update: aws-node-rest-api-typescript-dev-update
-  find: aws-node-rest-api-typescript-dev-find
-  findOne: aws-node-rest-api-typescript-dev-findOne
-  deleteOne: aws-node-rest-api-typescript-dev-deleteOne
+  createPost: manage-post-serverless-dev-createPost (1.9 MB)
+  getAllPost: manage-post-serverless-dev-getAllPost (1.9 MB)
+  getPost: manage-post-serverless-dev-getPost (1.9 MB)
+  updatePost: manage-post-serverless-dev-updatePost (1.9 MB)
+  deletePost: manage-post-serverless-dev-deletePost (1.9 MB)
 layers:
   None
 Serverless: Removing old service artifacts from S3...
