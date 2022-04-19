@@ -1,0 +1,35 @@
+createPost:
+  handler: src/modules/posts/function/postHandler.create
+  events:
+    - http:
+        method: post
+        path: create-post
+        cors: true
+getAllPost:
+  handler: src/modules/posts/function/postHandler.gets
+  events:
+    - http:
+        method: get
+        path: get-post
+        cors: true
+getPost:
+  handler: src/modules/posts/function/postHandler.getById
+  events:
+    - http:
+        method: get
+        path: get-post/{postId}
+        cors: true
+updatePost:
+  handler: src/modules/posts/function/postHandler.update
+  events:
+    - http:
+        method: put
+        path: update-post/{postId}
+        cors: true
+deletePost:
+  handler: src/modules/posts/function/postHandler.remove
+  events:
+    - http:
+        method: delete
+        path: delete-post/{postId}
+        cors: true
