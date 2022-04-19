@@ -2,7 +2,7 @@ import { ResponseUtil } from '@src/core/response';
 import postService from '@src/modules/posts/service';
 import { Context } from 'aws-lambda';
 import * as uuid from 'uuid';
-import { PostValidate } from '../utils/postValidate';
+import { PostValidate } from '@src/modules/posts/utils/postValidate';
 
 export default class PostController {
   postValidate = new PostValidate();

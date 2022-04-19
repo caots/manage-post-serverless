@@ -1,7 +1,10 @@
+import config from "@src/config";
 import { Post } from "@src/modules/posts/model/Post";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
 class PostService {
+  private mustHaveTableName = "notHaveTableName";
+
   constructor(
     private readonly docClient: DocumentClient,
     private readonly tableName: string
@@ -10,7 +13,7 @@ class PostService {
   async getAllPosts(): Promise<Post[]> {
     const result = await this.docClient
       .scan({
-        TableName: this.tableName,
+        TableName: this.tableName || this.mustHaveTableName,
       })
       .promise();
 
@@ -20,7 +23,7 @@ class PostService {
   async getPost(postId: string): Promise<Post> {
     const result = await this.docClient
       .get({
-        TableName: this.tableName,
+        TableName: this.tableName || this.mustHaveTableName,
         Key: { postId },
       })
       .promise();
@@ -31,7 +34,7 @@ class PostService {
   async createPost(post: Post): Promise<Post> {
     await this.docClient
       .put({
-        TableName: this.tableName,
+        TableName: this.tableName || this.mustHaveTableName,
         Item: post,
       })
       .promise();
@@ -42,7 +45,7 @@ class PostService {
   async updatePost(postId: string, partialPost: Partial<Post>): Promise<Post> {
     const updated = await this.docClient
       .update({
-        TableName: this.tableName,
+        TableName: this.tableName || this.mustHaveTableName,
         Key: { postId },
         UpdateExpression:
           "set #title = :title, description = :description, active = :active",
@@ -64,7 +67,7 @@ class PostService {
   async deletePost(postId: string) {
     return this.docClient
       .delete({
-        TableName: this.tableName,
+        TableName: this.tableName || this.mustHaveTableName,
         Key: { postId },
       })
       .promise();

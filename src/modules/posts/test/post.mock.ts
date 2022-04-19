@@ -31,6 +31,11 @@ export const createPostBody = {
   title: "HTML/CSS/JS for newbies"
 };
 
+export const createPostBodyInvalid = {
+  description: "description 1",
+  title: ""
+};
+
 export const createPost = {
   active: true,
   updatedAt: "2022-04-19T07:12:31.937Z",
