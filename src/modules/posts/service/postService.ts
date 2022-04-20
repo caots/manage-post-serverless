@@ -15,10 +15,10 @@ class PostService {
     const results = await listPostHelper(
       this.docClient,
       this.tableName,
-      params.title,
-      params.limit,
+      params?.title,
+      params?.limit,
       "postId",
-      params.next
+      params?.next
     );
     return results.items as Post[];
   }

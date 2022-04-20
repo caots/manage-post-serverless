@@ -5,7 +5,7 @@ import { isEmpty, has } from "lodash";
 export const listPostHelper = async (
   docClient: DocumentClient,
   tableName: string,
-  title?: string,
+  title: string = "",
   limit?: number,
   keyName?: string,
   nextToken?: any
