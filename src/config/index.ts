@@ -7,3 +7,7 @@ export default {
   REGION: process.env.REGION,
   IS_OFFLINE: process.env.IS_OFFLINE,
 }
+
+export const DEFAULT_LIMIT = {
+  POST: 10
+}
