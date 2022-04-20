@@ -11,17 +11,35 @@ aws-serverless-api
 ├─ source-map-install.js
 ├─ src
 │ ├─ core
-│ ├─ config
-│ ├─ modules
+│ │ ├─ middify.ts             # Config middify for serverless
+│ │ ├─ response.ts            # Config middify for serverless
+│ │ ├─ formatJsonResponse.ts            # Config format json response for serverless
+│ ├─ config                   # Configs, constants
+│ │ ├─ db.ts                  # Config Db
+│ │ ├─ index.ts               # Config constants
+│ │ ├─ message.ts             # Config Message
+│ ├─ modules                  # Code base of each modules
 │ │ ├─ post
 │ │ │ ├─ config
+│ │ │ | ├─ post-functions.yml   # config serverless for post module
 │ │ │ ├─ controller
+│ │ │ | ├─ postController.ts   # Post controller source code
 │ │ │ ├─ dtos
+│ │ │ | ├─ createPostDto.ts   # Create post dto source code
+│ │ │ | ├─ getAllPostDto.ts   # Get all post dto source code
+│ │ │ | ├─ updatePostDto.ts   # Update post dto source code
 │ │ │ ├─ function - handler
+│ │ │ | ├─ postHandler.ts   # Post Handler source code
 | | | ├─ service
+│ │ │ | ├─ index.ts   
+│ │ │ | ├─ postService.ts   # Post Service source code
 | | | ├─ utils
-│ │ │ └─ model
+│ │ │ | ├─ dbHelper.ts   # Helper query connect DB
+│ │ │ | ├─ postValidate.ts   # Post Validate source code
+│ │ │ ├─ model
+│ │ │ | ├─ postModel.ts   # Post Model source code
 ├─ tsconfig.json
+├─ jest.config.json
 └─ webpack.config.js
 
 ```
@@ -65,33 +83,12 @@ $ npm run deploy
 The expected result should be similar to:
 
 ```
-Serverless: Compiling with Typescript...
-Serverless: Using local tsconfig.json
-Serverless: Typescript compiled.
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-node-rest-api-typescript.zip file to S3 (1.86 MB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-......................................
-Serverless: Stack update finished..
-Service Information
-service: aws-node-rest-api-typescript
-stage: dev
-region: us-east-1
-stack: aws-node-rest-api-typescript-dev
-resources: 32
-api keys:
-  None
 endpoints:
-  POST - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/create-post
-  GET - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post
-  GET - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post/{postId}
-  PUT - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/update-post/{postId}
-  DELETE - https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/delete-post/{postId}
+  POST - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/create-post
+  GET - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/get-post
+  GET - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/get-post/{postId}
+  PUT - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/update-post/{postId}
+  DELETE - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/delete-post/{postId}
 functions:
   createPost: manage-post-serverless-dev-createPost (1.9 MB)
   getAllPost: manage-post-serverless-dev-getAllPost (1.9 MB)
@@ -103,15 +100,3 @@ layers:
 Serverless: Removing old service artifacts from S3...
 Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
 ```
-
-## Usage
-
-send an HTTP request directly to the endpoint using a tool like curl
-
-```
-curl https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/get-post
-```
-
-## Scaling
-
-By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
