@@ -26,15 +26,22 @@ export const getAllPost = [
   }
 ];
 
-export const createPostBody = {
-  description: "description 1",
-  title: "HTML/CSS/JS for newbies"
-};
-
-export const createPostBodyInvalid = {
-  description: "description 1",
-  title: ""
-};
+export const createPostBody = [
+  {
+    title: "",
+    data: {
+      description: "description 1",
+      title: "HTML/CSS/JS for newbies"
+    }
+  },
+  {
+    title: "",
+    data: {
+      description: "description 1",
+      title: ""
+    }
+  }
+]
 
 export const createPost = {
   active: true,
@@ -53,3 +60,58 @@ export const updatedPost = {
   description: "description 1",
   title: "HTML/CSS/JS for newbies"
 };
+
+export const ParamsGetAllPostService = [
+  {
+    title: "get all post service correct params",
+    params: {
+      title: "aa",
+      limit: 1,
+      next: "aa"
+    }
+  },
+  {
+    title: "get all post service incorrect params",
+    params: {
+      title: "",
+      limit: 1,
+      next: ""
+    }
+  }
+]
+
+export const createPostHelper = [
+  {
+    title: "case 1",
+    data: {
+      docClient: null,
+      tableName: "",
+      title: "",
+      limit: 0,
+      keyName: "",
+      nextToken: ""
+    }
+  },
+  {
+    title: "case 2",
+    data: {
+      docClient: null,
+      tableName: "tableName",
+      title: "abc",
+      limit: 0,
+      keyName: "",
+      nextToken: ""
+    }
+  },
+  {
+    title: "case 3",
+    data: {
+      docClient: null,
+      tableName: "tableName",
+      title: "abc",
+      limit: 0,
+      keyName: "abc",
+      nextToken: "abc"
+    }
+  }
+]

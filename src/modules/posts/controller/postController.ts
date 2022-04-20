@@ -18,7 +18,6 @@ export default class PostController {
       const posts = await postService.getAllPosts(params);
       return ResponseUtil.success(posts);
     } catch (err) {
-      console.error(err);
       return ResponseUtil.error(err.message);
     }
   }
