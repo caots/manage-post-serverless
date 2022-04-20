@@ -1,6 +1,7 @@
 import config from "@src/config";
-import { Post } from "@src/modules/posts/model/Post";
+import { Post, RequestPost } from "@src/modules/posts/model/Post";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { listPostHelper } from "../utils/dbHelper";
 
 class PostService {
   private mustHaveTableName = "notHaveTableName";
@@ -8,16 +9,18 @@ class PostService {
   constructor(
     private readonly docClient: DocumentClient,
     private readonly tableName: string
-  ) {}
+  ) { }
 
-  async getAllPosts(): Promise<Post[]> {
-    const result = await this.docClient
-      .scan({
-        TableName: this.tableName || this.mustHaveTableName,
-      })
-      .promise();
-
-    return result.Items as Post[];
+  async getAllPosts(params: RequestPost): Promise<Post[]> {
+    const results = await listPostHelper(
+      this.docClient,
+      this.tableName,
+      params.title,
+      params.limit,
+      "postId",
+      params.next
+    );
+    return results.items as Post[];
   }
 
   async getPost(postId: string): Promise<Post> {

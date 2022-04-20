@@ -6,3 +6,9 @@ export interface Post {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface RequestPost {
+  limit: number;
+  next: string;
+  title: string;
+}

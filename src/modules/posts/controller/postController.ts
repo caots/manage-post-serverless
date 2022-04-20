@@ -3,6 +3,7 @@ import postService from '@src/modules/posts/service';
 import { Context } from 'aws-lambda';
 import * as uuid from 'uuid';
 import { PostValidate } from '@src/modules/posts/utils/postValidate';
+import { RequestPost } from '../model/Post';
 
 export default class PostController {
   postValidate = new PostValidate();
@@ -12,8 +13,9 @@ export default class PostController {
    * @param {*} event
    */
    public gets = async (event: any, context?: Context) => {
+    const params: RequestPost = event.queryStringParameters;
     try {
-      const posts = await postService.getAllPosts();
+      const posts = await postService.getAllPosts(params);
       return ResponseUtil.success(posts);
     } catch (err) {
       console.error(err);
