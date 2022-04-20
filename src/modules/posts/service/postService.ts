@@ -1,6 +1,7 @@
 import config from "@src/config";
 import { Post, RequestPost } from "@src/modules/posts/model/Post";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { ResponseListPost } from "../dtos/getAllPostDto";
 import { listPostHelper } from "../utils/dbHelper";
 
 class PostService {
@@ -11,7 +12,7 @@ class PostService {
     private readonly tableName: string
   ) { }
 
-  async getAllPosts(params: RequestPost): Promise<Post[]> {
+  async getAllPosts(params: RequestPost): Promise<ResponseListPost> {
     const results = await listPostHelper(
       this.docClient,
       this.tableName,
@@ -20,7 +21,12 @@ class PostService {
       "postId",
       params?.next
     );
-    return results.items as Post[];
+    return {
+      data: results.items,
+      next: params?.next,
+      limit: params?.limit
+    };
+    
   }
 
   async getPost(postId: string): Promise<Post> {
