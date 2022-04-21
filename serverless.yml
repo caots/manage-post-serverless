@@ -41,10 +41,10 @@ provider:
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DB_TABLE_NAME}"
+      Resource: "*"
 
 functions:
-  - ${file(src/modules/posts/config/post-functions.yml)}
+  ${file(src/modules/posts/config/serverless.yml)}
 
 resources:
   Resources:
