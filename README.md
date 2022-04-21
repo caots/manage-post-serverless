@@ -21,7 +21,7 @@ aws-serverless-api
 │ ├─ modules                  # Code base of each modules
 │ │ ├─ post
 │ │ │ ├─ config
-│ │ │ | ├─ post-functions.yml   # config serverless for post module
+│ │ │ | ├─ serverless.yml   # config serverless for post module
 │ │ │ ├─ controller
 │ │ │ | ├─ postController.ts   # Post controller source code
 │ │ │ ├─ dtos
@@ -38,6 +38,12 @@ aws-serverless-api
 │ │ │ | ├─ postValidate.ts   # Post Validate source code
 │ │ │ ├─ model
 │ │ │ | ├─ postModel.ts   # Post Model source code
+│ │ │ ├─ test     # Unit test for project
+│ │ │ | ├─ controller   # Test all func in controller
+│ │ │ | ├─ function  # Test all func in function
+│ │ │ | ├─ mock     # mock data to test
+│ │ │ | ├─ service   # Test all func in service
+│ │ │ | ├─ utils   # Test all func in utils
 ├─ tsconfig.json
 ├─ jest.config.json
 └─ webpack.config.js
@@ -64,8 +70,9 @@ Serverless: Using local tsconfig.json
 Serverless: Typescript compiled.
 
 {
-    "statusCode": 200,
-    "body": "{\"code\":0,\"message\":\"success\",\"data\":[{\"_id\":\"5dff21f71c9d440000a30dad\",\"createdAt\":\"2020-05-16T09:27:51.219Z\"},{\"_id\":\"5dff22ba1c9d440000a30dae\",\"createdAt\":\"2020-05-16T09:27:51.220Z\"}]}"
+    "status": 200,
+    "message": "success",
+    "data": "{\"code\":0,\"message\":\"success\",\"data\":[{\"_id\":\"5dff21f71c9d440000a30dad\",\"createdAt\":\"2020-05-16T09:27:51.219Z\"},{\"_id\":\"5dff22ba1c9d440000a30dae\",\"createdAt\":\"2020-05-16T09:27:51.220Z\"}]}"
 }
 ```
 ### To Test It Locally
@@ -79,6 +86,9 @@ Serverless: Typescript compiled.
 $ npm run deploy
 
 ```
+### To run Unit test and coverage
+* $ ```npm run test``` or ```jest``` to test
+* $ ```jest --coverage``` to test show coverage
 
 The expected result should be similar to:
 
@@ -97,6 +107,4 @@ functions:
   deletePost: manage-post-serverless-dev-deletePost (1.9 MB)
 layers:
   None
-Serverless: Removing old service artifacts from S3...
-Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
 ```
