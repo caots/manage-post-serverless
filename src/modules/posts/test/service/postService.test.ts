@@ -27,9 +27,14 @@ describe('get all post service', () => {
 })
 
 describe('get post service', () => {
-  it("Get Post by null id", async () => {
+  it("Get Post by id", async () => {
     const { Item } = await ddb.get({ TableName: 'Posts-dev', Key: { postId: 'ea59ee0e-d6e4-4c30-a453-4b909063badd' } }).promise();
     expect(Item).toEqual(responseGetPostById);
+  });
+
+  it("Get Post by null id", async () => {
+    const { Item } = await ddb.get({ TableName: 'Posts-dev', Key: { postId: '' } }).promise();
+    expect(Item).toEqual({});
   });
 })
 
