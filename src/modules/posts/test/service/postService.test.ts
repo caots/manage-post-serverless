@@ -1,5 +1,18 @@
 import PostService from '../../service/postService';
-import { createPost, ParamsGetAllPostService, updatedPost } from '../mock/post.mock';
+import { createPost, ParamsGetAllPostService, responseGetPostById, updatedPost } from '../mock/post.mock';
+const { DocumentClient } = require('aws-sdk/clients/dynamodb');
+
+const isTest = true;
+const config = {
+  convertEmptyValues: true,
+  ...(isTest && {
+    endpoint: 'dynamodb.us-east-1.amazonaws.com',
+    sslEnabled: false,
+    region: 'us-east-1',
+  }),
+};
+
+const ddb = new DocumentClient(config);
 
 describe('get all post service', () => {
 
@@ -14,16 +27,9 @@ describe('get all post service', () => {
 })
 
 describe('get post service', () => {
-  it("Get Post by null id", () => {
-    const postService = new PostService(null, "tableName")
-    const result = postService.getPost("")
-    expect(result).toBeDefined()
-  });
-
-  it("Get Post by id", () => {
-    const postService = new PostService(null, "tableName")
-    const result = postService.getPost("abc")
-    expect(result).toBeDefined()
+  it("Get Post by null id", async () => {
+    const { Item } = await ddb.get({ TableName: 'Posts-dev', Key: { postId: 'ea59ee0e-d6e4-4c30-a453-4b909063badd' } }).promise();
+    expect(Item).toEqual(responseGetPostById);
   });
 })
 

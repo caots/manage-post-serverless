@@ -115,3 +115,12 @@ export const createPostHelper = [
     }
   }
 ]
+
+export const responseGetPostById = {
+  active: true,
+  updatedAt: '2022-04-21T02:27:12.584Z',
+  createdAt: '2022-04-21T02:27:12.584Z',
+  postId: 'ea59ee0e-d6e4-4c30-a453-4b909063badd',
+  description: 'description 1',
+  title: 'Angular for newbies 1'
+}
