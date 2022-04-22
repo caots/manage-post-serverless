@@ -118,9 +118,18 @@ export const createPostHelper = [
 
 export const responseGetPostById = {
   active: true,
-  updatedAt: '2022-04-21T02:27:12.584Z',
-  createdAt: '2022-04-21T02:27:12.584Z',
-  postId: 'ea59ee0e-d6e4-4c30-a453-4b909063badd',
-  description: 'description 1',
-  title: 'Angular for newbies 1'
+  updatedAt: "2022-04-21T02:28:10.815Z",
+  createdAt: "2022-04-21T02:28:10.815Z",
+  postId: "7e967e60-cd98-48bc-9343-b35457d584e5",
+  description: "description 1",
+  title: "Angular for newbies "
+}
+
+export const requestCreatePost = {
+  active: true,
+  updatedAt: "2022-04-19T07:12:31.937Z",
+  createdAt: "2022-04-19T07:12:31.937Z",
+  postId: "f7b7b2bf-cac5-4e09-81a3-b92bae4a5dc5xx",
+  description: "description 2",
+  title: "HTML/CSS/JS for newbies 2"
 }
