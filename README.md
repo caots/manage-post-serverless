@@ -19,25 +19,25 @@ aws-serverless-api
 │ │ ├─ index.ts               # Config constants
 │ │ ├─ message.ts             # Config Message
 │ ├─ modules                  # Code base of each modules
-│ │ ├─ post
+│ │ ├─ pet
 │ │ │ ├─ config
-│ │ │ | ├─ serverless.yml   # config serverless for post module
+│ │ │ | ├─ serverless.yml   # config serverless for pet module
 │ │ │ ├─ controller
-│ │ │ | ├─ postController.ts   # Post controller source code
+│ │ │ | ├─ petController.ts   # pet controller source code
 │ │ │ ├─ dtos
-│ │ │ | ├─ createPostDto.ts   # Create post dto source code
-│ │ │ | ├─ getAllPostDto.ts   # Get all post dto source code
-│ │ │ | ├─ updatePostDto.ts   # Update post dto source code
+│ │ │ | ├─ createPetDto.ts   # Create pet dto source code
+│ │ │ | ├─ getAllPetDto.ts   # Get all pet dto source code
+│ │ │ | ├─ updatePetDto.ts   # Update pet dto source code
 │ │ │ ├─ function - handler
-│ │ │ | ├─ postHandler.ts   # Post Handler source code
+│ │ │ | ├─ petHandler.ts   # Pet Handler source code
 | | | ├─ service
 │ │ │ | ├─ index.ts   
-│ │ │ | ├─ postService.ts   # Post Service source code
+│ │ │ | ├─ petService.ts   # Pet Service source code
 | | | ├─ utils
 │ │ │ | ├─ dbHelper.ts   # Helper query connect DB
-│ │ │ | ├─ postValidate.ts   # Post Validate source code
+│ │ │ | ├─ petValidate.ts   # Pet Validate source code
 │ │ │ ├─ model
-│ │ │ | ├─ postModel.ts   # Post Model source code
+│ │ │ | ├─ petModel.ts   # Pet Model source code
 │ │ │ ├─ test     # Unit test for project
 │ │ │ | ├─ controller   # Test all func in controller
 │ │ │ | ├─ function  # Test all func in function
@@ -94,17 +94,17 @@ The expected result should be similar to:
 
 ```
 endpoints:
-  POST - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/create-post
-  GET - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/get-post
-  GET - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/get-post/{postId}
-  PUT - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/update-post/{postId}
-  DELETE - https://vhhf9ng1f3.execute-api.us-east-1.amazonaws.com/dev/delete-post/{postId}
+  POST - https://e1wvw0c78l.execute-api.us-east-1.amazonaws.com/dev/create-pet
+  GET - https://e1wvw0c78l.execute-api.us-east-1.amazonaws.com/dev/get-pet
+  GET - https://e1wvw0c78l.execute-api.us-east-1.amazonaws.com/dev/get-pet/{petId}
+  PUT - https://e1wvw0c78l.execute-api.us-east-1.amazonaws.com/dev/update-pet/{petId}
+  DELETE - https://e1wvw0c78l.execute-api.us-east-1.amazonaws.com/dev/delete-pet/{petId}
 functions:
-  createPost: manage-post-serverless-dev-createPost (1.9 MB)
-  getAllPost: manage-post-serverless-dev-getAllPost (1.9 MB)
-  getPost: manage-post-serverless-dev-getPost (1.9 MB)
-  updatePost: manage-post-serverless-dev-updatePost (1.9 MB)
-  deletePost: manage-post-serverless-dev-deletePost (1.9 MB)
+  createPet: manage-pet-serverless-dev-createPet (2.1 MB)
+  getAllPet: manage-pet-serverless-dev-getAllPet (2.1 MB)
+  getPet: manage-pet-serverless-dev-getPet (2.1 MB)
+  updatePet: manage-pet-serverless-dev-updatePet (2.1 MB)
+  deletePet: manage-pet-serverless-dev-deletePet (2.1 MB)
 layers:
   None
 ```

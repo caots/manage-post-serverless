@@ -1,5 +1,5 @@
-export interface Post {
-  postId: string;
+export interface Pet {
+  petId: string;
   title?: string;
   description?: string;
   active?: boolean;
@@ -7,7 +7,7 @@ export interface Post {
   updatedAt?: string;
 }
 
-export interface RequestPost {
+export interface RequestPet {
   limit: number;
   next: string;
   title: string;

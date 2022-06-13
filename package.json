@@ -1,9 +1,9 @@
 {
-  "name": "manage-post-serverless",
+  "name": "manage-pet-serverless",
   "version": "1.0.0",
   "description": "Serverless API with AWS Lambda",
   "main": "handler.ts",
-  "author": "Caots-PG",
+  "author": "Hung-PG",
   "license": "MIT",
   "scripts": {
     "start": "sls offline start",

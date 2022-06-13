@@ -9,5 +9,5 @@ export default {
 }
 
 export const DEFAULT_LIMIT = {
-  POST: 10
+  PET: 10
 }

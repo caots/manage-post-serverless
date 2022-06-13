@@ -1,10 +1,10 @@
 import * as Joi from "joi";
-import { CreatePost } from "@src/modules/posts/dtos/createPostDto";
+import { CreatePet } from "@src/modules/pets/dtos/createPetDto";
 
-export class PostValidate {
+export class PetValidate {
   private joi: Joi.AnySchema;
  
-  public vCreatePost(signupObj: CreatePost) {
+  public vCreatePet(signupObj: CreatePet) {
     const object = {
         title: Joi.string().required(),
         description: Joi.string().required() 

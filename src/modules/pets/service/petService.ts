@@ -1,10 +1,10 @@
 import config from "@src/config";
-import { Post, RequestPost } from "@src/modules/posts/model/Post";
+import { Pet, RequestPet } from "@src/modules/pets/model/Pet";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import { ResponseListPost } from "../dtos/getAllPostDto";
-import { listPostHelper } from "../utils/dbHelper";
+import { ResponseListPet } from "../dtos/getAllPetDto";
+import { listPetHelper } from "../utils/dbHelper";
 
-class PostService {
+class PetService {
   private mustHaveTableName = "notHaveTableName";
 
   constructor(
@@ -12,13 +12,13 @@ class PostService {
     private readonly tableName: string
   ) { }
 
-  async getAllPosts(params: RequestPost): Promise<ResponseListPost> {
-    const results = await listPostHelper(
+  async getAllPets(params: RequestPet): Promise<ResponseListPet> {
+    const results = await listPetHelper(
       this.docClient,
       this.tableName,
       params?.title,
       params?.limit,
-      "postId",
+      "petId",
       params?.next
     );
     return {
@@ -29,58 +29,58 @@ class PostService {
     
   }
 
-  async getPost(postId: string): Promise<Post> {
+  async getPet(petId: string): Promise<Pet> {
     const result = await this.docClient
       .get({
         TableName: this.tableName || this.mustHaveTableName,
-        Key: { postId },
+        Key: { petId },
       })
       .promise();
 
-    return result.Item as Post;
+    return result.Item as Pet;
   }
 
-  async createPost(post: Post): Promise<Post> {
+  async createPet(pet: Pet): Promise<Pet> {
     await this.docClient
       .put({
         TableName: this.tableName || this.mustHaveTableName,
-        Item: post,
+        Item: pet,
       })
       .promise();
 
-    return post;
+    return pet;
   }
 
-  async updatePost(postId: string, partialPost: Partial<Post>): Promise<Post> {
+  async updatePet(petId: string, partialPet: Partial<Pet>): Promise<Pet> {
     const updated = await this.docClient
       .update({
         TableName: this.tableName || this.mustHaveTableName,
-        Key: { postId },
+        Key: { petId },
         UpdateExpression:
           "set #title = :title, description = :description, active = :active",
         ExpressionAttributeNames: {
           "#title": "title",
         },
         ExpressionAttributeValues: {
-          ":title": partialPost.title,
-          ":description": partialPost.description,
-          ":active": partialPost.active,
+          ":title": partialPet.title,
+          ":description": partialPet.description,
+          ":active": partialPet.active,
         },
         ReturnValues: "UPDATED_NEW",
       })
       .promise();
 
-    return updated.Attributes as Post;
+    return updated.Attributes as Pet;
   }
 
-  async deletePost(postId: string) {
+  async deletePet(petId: string) {
     return this.docClient
       .delete({
         TableName: this.tableName || this.mustHaveTableName,
-        Key: { postId },
+        Key: { petId },
       })
       .promise();
   }
 }
 
-export default PostService;
+export default PetService;

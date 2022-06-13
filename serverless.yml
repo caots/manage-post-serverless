@@ -1,6 +1,6 @@
-org: caotran
-app: manage-post-serverless
-service: manage-post-serverless
+# org: caotran
+# app: manage-pet-serverless
+service: manage-pet-serverless
 
 # Add the serverless-webpack plugin
 plugins:
@@ -33,7 +33,7 @@ provider:
   region: ${opt:region, 'us-east-1'}
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-    DB_TABLE_NAME: Posts-${self:provider.stage}
+    DB_TABLE_NAME: Pets-${self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -47,19 +47,19 @@ provider:
       Resource: "*"
 
 functions:
-  ${file(src/modules/posts/config/serverless.yml)}
+  ${file(src/modules/pets/config/serverless.yml)}
 
 resources:
   Resources:
-    PostsListTable:
+    PetsListTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:provider.environment.DB_TABLE_NAME}
         AttributeDefinitions:
-          - AttributeName: postId
+          - AttributeName: petId
             AttributeType: S
         KeySchema:
-          - AttributeName: postId
+          - AttributeName: petId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1

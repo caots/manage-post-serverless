@@ -1,9 +1,9 @@
 module.exports = {
   tables: [
     {
-      TableName: `Posts-dev`,
-      KeySchema: [{ AttributeName: "postId", KeyType: "HASH" }],
-      AttributeDefinitions: [{ AttributeName: "postId", AttributeType: "S" }],
+      TableName: `Pet-dev`,
+      KeySchema: [{ AttributeName: "petId", KeyType: "HASH" }],
+      AttributeDefinitions: [{ AttributeName: "petId", AttributeType: "S" }],
       ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1 },
     },
   ],

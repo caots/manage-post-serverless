@@ -1,9 +1,9 @@
 import middify from '@src/core/middify';
 import { APIGatewayEvent, APIGatewayProxyResult, Context, Handler } from 'aws-lambda';
 
-import PostController from '@src/modules/posts/controller/postController';
+import PetController from '@src/modules/pets/controller/petController';
 
-const postController = new PostController();
+const petController = new PetController();
 
 /**
  * Get all
@@ -12,7 +12,7 @@ export const gets: Handler = middify(async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
-  return postController.gets(event, context);
+  return petController.gets(event, context);
 });
 
 /**
@@ -22,35 +22,35 @@ export const gets: Handler = middify(async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
-  return postController.getById(event, context);
+  return petController.getById(event, context);
 });
 
 /**
- * Create post
+ * Create pet
  */
 export const create: Handler = middify(async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
-  return postController.create(event, context);
+  return petController.create(event, context);
 });
 
 /**
- * update post
+ * update pet
  */
  export const update: Handler = middify(async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
-  return postController.update(event, context);
+  return petController.update(event, context);
 });
 
 /**
- * delete post
+ * delete pet
  */
  export const remove: Handler = middify(async (
   event: APIGatewayEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> => {
-  return postController.delete(event, context);
+  return petController.delete(event, context);
 });

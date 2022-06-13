@@ -2,7 +2,7 @@ import { DEFAULT_LIMIT } from "@src/config";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { isEmpty, has } from "lodash";
 
-export const listPostHelper = async (
+export const listPetHelper = async (
   docClient: DocumentClient,
   tableName: string,
   title: string = "",
@@ -14,7 +14,7 @@ export const listPostHelper = async (
   items: any[];
 }> => {
   if (!limit) {
-    limit = DEFAULT_LIMIT.POST;
+    limit = DEFAULT_LIMIT.PET;
   }
 
   let params: DocumentClient.ScanInput = {
