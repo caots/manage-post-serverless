@@ -4,6 +4,7 @@ import { Context } from 'aws-lambda';
 import * as uuid from 'uuid';
 import { PostValidate } from '@src/modules/posts/utils/postValidate';
 import { RequestPost } from '../model/Post';
+import axios from 'axios';
 
 export default class PostController {
   postValidate = new PostValidate();
@@ -12,7 +13,7 @@ export default class PostController {
    * Get all post
    * @param {*} event
    */
-   public gets = async (event: any, context?: Context) => {
+  public gets = async (event: any, context?: Context) => {
     const params: RequestPost = event.queryStringParameters;
     try {
       const posts = await postService.getAllPosts(params);
@@ -26,7 +27,7 @@ export default class PostController {
    * Find one
    * @param {*} event
    */
-   public getById = async (event: any, context?: Context) => {
+  public getById = async (event: any, context?: Context) => {
     const postId: string = event.pathParameters.postId;
     try {
       const post = await postService.getPost(postId);
@@ -42,7 +43,7 @@ export default class PostController {
    * Create post
    * @param {*} event
    */
-   public create = async (event: any, context?: Context) => {
+  public create = async (event: any, context?: Context) => {
     try {
       const postId: string = uuid.v4();
       const params = await this.postValidate.vCreatePost(event.body);
@@ -61,11 +62,27 @@ export default class PostController {
     }
   }
 
+  public redirectResultImocha = async (event: any, context?: Context) => {
+    try {
+      const params = event.body
+      const rs = await axios.post(
+        // `https://api.uat.measuredskill.uat4.pgtest.co/v1/assessments/callback`,
+        'https://api.measuredskills.com/v1/assessments/callback',
+        params
+      )
+      console.log(rs);
+      return ResponseUtil.success(params);
+    } catch (err) {
+      console.error(err);
+      return ResponseUtil.error(err.message);
+    }
+  }
+
   /**
    * Update post
    * @param {*} event
    */
-   public update = async (event: any, context?: Context) => {
+  public update = async (event: any, context?: Context) => {
     const postId: string = event.pathParameters.postId;
     const { body } = event;
     try {
@@ -81,7 +98,7 @@ export default class PostController {
    * Delete post
    * @param {*} event
    */
-   public delete = async (event: any, context?: Context) => {
+  public delete = async (event: any, context?: Context) => {
     const postId: string = event.pathParameters.postId;
     try {
       const post = await postService.deletePost(postId);
