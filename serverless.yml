@@ -1,3 +1,5 @@
+org: caotran
+app: manage-post-serverless
 service: manage-post-serverless
 
 # Add the serverless-webpack plugin
